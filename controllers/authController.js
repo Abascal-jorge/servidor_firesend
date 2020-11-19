@@ -42,11 +42,6 @@ exports.autenticarUsuario = async (req, res, next) => {
     //console.log("El usuario si existe");
 }
 
-
-
-
 exports.usuarioAutenticado = (req, res, next) => {
-    
     res.json({ usuario: req.usuario });
-    
 }

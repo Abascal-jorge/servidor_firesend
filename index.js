@@ -19,6 +19,7 @@ app.use( express.json() );
 //Rutas de la app
 app.use("/api/usuarios", require("./routes/usuarios"));
 app.use("/api/auth", require("./routes/auth"));
+app.use("/api/enlaces", require("./routes/enlaces"));
 
 
 //Arrancar la app
