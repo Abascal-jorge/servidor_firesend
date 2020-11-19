@@ -2,7 +2,7 @@ const Usuario = require("../models/Usuario");
 const bcrypt = require("bcrypt");
 const { validationResult } = require("express-validator");
 const jwt = require("jsonwebtoken");
-require("dotenv").config({ path: "variables.env"});
+require("dotenv").config({ path: "variables.env" });
 
 exports.autenticarUsuario = async (req, res, next) => {
     
@@ -40,9 +40,10 @@ exports.autenticarUsuario = async (req, res, next) => {
         return next();
     }
     //console.log("El usuario si existe");
-
-
 }
+
+
+
 
 exports.usuarioAutenticado = (req, res, next) => {
     
