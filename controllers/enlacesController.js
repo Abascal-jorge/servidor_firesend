@@ -1,5 +1,6 @@
 const Enlaces = require("../models/Enlaces");
 const shortid = require("shortid");
+const bcrypt = require("bcrypt");
 
 exports.nuevoEnlace = async (req, res,next) => {
    
@@ -14,7 +15,22 @@ exports.nuevoEnlace = async (req, res,next) => {
     enlace.password = password;
 
     //Si el usuario esta autenticdo
+    if(req.usuario){
+        const { password, descargas } = req.body;
 
+        //Asignar a enlace el numero de descargas
+        if(descargas) {
+            enlace.descargas = descargas;
+        }
+
+        //Asignar un password
+        if(password){
+            const salt = bcrypt.genSaltSync(10);
+            enlace.password = await bcrypt.hashSync(password, salt);
+        }
+
+        enlace.autor = req.usuario.id;
+    }
     //Almacenar en la BD
     try {
         await enlace.save();
