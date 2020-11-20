@@ -1,11 +1,16 @@
 const Enlaces = require("../models/Enlaces");
 const shortid = require("shortid");
 const bcrypt = require("bcrypt");
+const { validationResult } = require("express-validator");
 
 exports.nuevoEnlace = async (req, res,next) => {
    
     //Reisar si hay errores
-    console.log(req.body);
+    //console.log(req.body);
+    const errores = validationResult(req);
+    if(!errores.isEmpty()){
+        return res.status(400).json({ errores: errores.array() })
+    }
     //Crear un objeto
     const { nombre_original, password } = req.body;
     const enlace = new Enlaces();
@@ -42,3 +47,32 @@ exports.nuevoEnlace = async (req, res,next) => {
 }
 
 //npm i shortid
+
+//Obtener el enlace 
+exports.ontenerEnlace = async (req, res, next ) => {
+    //console.log(req.params.url);
+
+    //Verificar si existe el enlace
+    const enlace = await Enlaces.findOne({ url: req.params.url });
+    if(!enlace){
+        res.status(404).json({msg: "ese enlace no existe"});
+        return next();
+    }
+    //console.log(enlace);
+
+    //Si el enlace existe+
+    res.json({archivo: enlace.nombre});
+
+    //sI LAS DESCARGAR SON IGUALES A 1 BORRAR LA ENTRADA Y BORRAR EL ARCHIVO
+    const { descargas, nombre } = enlace;
+    if(descargas === 1 ){
+        //eLIMINAR EL ARCHIVO
+        req.archivo = nombre;
+        next();
+        //ELIMINAR LA ENTRADA DE LA BD
+    }else{
+        //si las descargas son > a 1 - restar 1
+        enlace.descargas --;
+        await enlace.save();
+    }
+}
