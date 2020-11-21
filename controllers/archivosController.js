@@ -33,7 +33,7 @@ exports.subirArchivo = async (req, res, next) => {
 }
 
 exports.eliminarArchivo = async (req, res) => {
-    console.log("desde archivos");
+    //console.log("desde archivos");
 
     try {
         fs.unlinkSync(__dirname + `/../uploads/${req.archivo}`);

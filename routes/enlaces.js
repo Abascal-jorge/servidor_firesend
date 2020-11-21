@@ -14,7 +14,7 @@ router.post("/",[
 );
 
 router.get("/:url",
-    enlacesController.ontenerEnlace,
+    enlacesController.obtenerEnlace,
     archivosController.eliminarArchivo
 );
 

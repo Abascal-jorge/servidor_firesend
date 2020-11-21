@@ -12,12 +12,12 @@ exports.nuevoEnlace = async (req, res,next) => {
         return res.status(400).json({ errores: errores.array() })
     }
     //Crear un objeto
-    const { nombre_original, password } = req.body;
+    const { nombre_original } = req.body;
     const enlace = new Enlaces();
     enlace.url = shortid.generate();
     enlace.nombre = shortid.generate();
     enlace.nombre_original = nombre_original;
-    enlace.password = password;
+    //enlace.password = password;
 
     //Si el usuario esta autenticdo
     if(req.usuario){
@@ -49,7 +49,7 @@ exports.nuevoEnlace = async (req, res,next) => {
 //npm i shortid
 
 //Obtener el enlace 
-exports.ontenerEnlace = async (req, res, next ) => {
+exports.obtenerEnlace = async (req, res, next ) => {
     //console.log(req.params.url);
 
     //Verificar si existe el enlace
