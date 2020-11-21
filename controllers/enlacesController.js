@@ -70,6 +70,7 @@ exports.ontenerEnlace = async (req, res, next ) => {
         req.archivo = nombre;
         next();
         //ELIMINAR LA ENTRADA DE LA BD
+        await Enlaces.findOneAndRemove(req.params.url);
     }else{
         //si las descargas son > a 1 - restar 1
         enlace.descargas --;
