@@ -29,7 +29,7 @@ exports.nuevoUsuario = async (req, res) => {
 
     try {
         await usuario.save();
-        res.json({ msg: "usuario creado"});   
+        res.json({ msg: "usuario creado exitosamente"});   
     } catch (error) {
         console.log(error);
     }

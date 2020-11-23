@@ -25,7 +25,7 @@ exports.autenticarUsuario = async (req, res, next) => {
 
     //verificar el password y autenticar el usuario
     if(bcrypt.compareSync(password, usuario.password)){
-        console.log("El password es correcto")
+        //console.log("El password es correcto")
         //Crear json wbe token
         const token = jwt.sign({
             id: usuario._id,
