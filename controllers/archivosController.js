@@ -15,7 +15,7 @@ exports.subirArchivo = async (req, res, next) => {
                 const extension = file.originalname.substring(file.originalname.lastIndexOf("."), file.originalname.length)
                 cb(null, `${shortid.generate()}${extension}`);
             }
-        })
+        }) 
     }
     
     const upload = multer(configuracionMulter).single("archivo");

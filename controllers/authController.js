@@ -36,7 +36,7 @@ exports.autenticarUsuario = async (req, res, next) => {
         });
         res.json({ token });
     }else{
-        res.status(401).json({msg: "password incorrecto"});
+        res.status(401).json({msg: "Password incorrecto"});
         return next();
     }
     //console.log("El usuario si existe");
