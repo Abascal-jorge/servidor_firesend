@@ -61,7 +61,6 @@ exports.todosEnlaces = async (req, res) => {
 //Obtener el enlace 
 exports.obtenerEnlace = async (req, res, next ) => {
     //console.log(req.params.url);
-
     //Verificar si existe el enlace
     const enlace = await Enlaces.findOne({ url: req.params.url });
     if(!enlace){
@@ -73,18 +72,5 @@ exports.obtenerEnlace = async (req, res, next ) => {
     //Si el enlace existe+
     res.json({archivo: enlace.nombre});
     
-    return;
-    //sI LAS DESCARGAR SON IGUALES A 1 BORRAR LA ENTRADA Y BORRAR EL ARCHIVO
-    const { descargas, nombre } = enlace;
-    if(descargas === 1 ){
-        //eLIMINAR EL ARCHIVO
-        req.archivo = nombre;
-        next();
-        //ELIMINAR LA ENTRADA DE LA BD
-        await Enlaces.findOneAndRemove(req.params.url);
-    }else{
-        //si las descargas son > a 1 - restar 1
-        enlace.descargas --;
-        await enlace.save();
-    }
+    next();
 }

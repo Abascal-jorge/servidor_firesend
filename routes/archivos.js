@@ -13,6 +13,10 @@ router.post("/",
     archivosController.subirArchivo
 );
 
+router.get("/:archivo",
+    archivosController.descargarArchivo,
+    archivosController.eliminarArchivo
+);
 /*router.delete("/:id",
     archivosController.eliminarArchivo
 );*/
